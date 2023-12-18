@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Javascript getting started</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><script src="dist/js/app.js" type="text/javascript"></script><style>.widget{display:block;position:relative;transform:translateX(-50%);left:50%;background-color:#a2c3a4;border:none;color:grey;opacity:0;visibility:hidden;transition:all 1s ease}.widget--show{opacity:1;visibility:visible}.content{position:relative;padding-right:50px;margin:25px 0}.content figure,.content p{display:inline-block}.content figure{font-size:30px;vertical-align:top;margin-right:15px}.buttons{text-align:right}.button{appearance:none;border:none;padding:5px 10px;color:#fff;background-color:#000;transition:.5s ease}.button:hover{background-color:#5c5c5c}.button--accept{animation:vibe 1.25s cubic-bezier(.33,.05,.2,.1) 2s both infinite}.button--accept:hover{animation:none}.button--close{top:0;position:relative;left:calc(100% - 30px)}@keyframes vibe{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}@media (max-width:399px){.content p{font-size:8px}.content figure{display:none}.button{display:block;margin-bottom:5px}}</style></head><body><section id="feedbackwidget" class="widget widget-success widget-hidden alert alert-success"><button id="close" class="button button--close">X</button><section class="content"><figure class="glyphicon glyphicon-ok"></figure><p>Mike wil graag deelnemen aan jouw spel.<br>Geef akkoord.</p></section><section class="buttons"><button id="deny" class="button button--deny">Weigeren</button> <button id="accept" class="button button--accept">Akkoord</button></section></section><div id="board" class="board"></div><canvas id="myChart" width="400" height="400"></canvas><script>jQuery(function($) {
+
+        Game.init();
+
+        console.log( "ready!" );
+        localStorage.clear();
+
+        // let feedbackWidget = new FeedbackWidget("widget-success");
+        let feedbackWidget = new FeedbackWidget("feedbackwidget");
+        feedbackWidget.show("Whoopsie", "error");
+
+        for (let j = 0; j < 15; j++){
+            feedbackWidget.log({message: 'Lorem ipsum dolor message '+j, type : 'success'})
+        }
+
+        let message = { message: 'Bijna klaar, tijd voor koffie', type: 'success' };
+        feedbackWidget.log(message);
+        let message2 = { message: 'Helemaal klaar, tijd voor koffie', type: 'success' };
+        feedbackWidget.log(message2);
+        let message3 = { message: 'Is geen blije toeter', type: 'failure' };
+        feedbackWidget.log(message3);
+
+        $("#deny, #close").on("click", function(){
+            feedbackWidget.hide();
+        });
+
+        // console.log(JSON.parse(localStorage.getItem('feedback_widget')));
+    });</script></body></html>

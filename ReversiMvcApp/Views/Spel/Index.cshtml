@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ReversiMvcApp.Models.Spel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 style="transform: scaleX(-1); text-align: right;">Reversi</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Nieuw spel aanmaken</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Omschrijving)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Omschrijving)
+                </td>
+                <td>
+                    <a class="btn btn-dark" asp-action="Join" asp-route-spelToken="@item.Token">Meespelen</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

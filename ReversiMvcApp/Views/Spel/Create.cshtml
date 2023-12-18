@@ -1,0 +1,37 @@
+﻿@using System.Security.Claims
+@model ReversiMvcApp.Models.Spel
+
+@{
+    ViewData["Title"] = "Create";
+    ClaimsPrincipal currentUser = this.User;
+    var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+}
+
+<h1>Nieuw spel aanmaken</h1>
+
+<hr />
+<div class="row">
+    <div class="col-lg-4">
+        <form asp-action="CreateGame">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Speler1Token" class="form-control" value="@(currentUserID)" readonly/>
+            
+            <label asp-for="Omschrijving">Spelnaam/omschrijving</label><br/>
+            <span asp-validation-for="Omschrijving" class="text-danger"></span>
+            <div class="input-group mb-3">
+                <input type="text" asp-for="Omschrijving" placeholer="Omschijving" class="form-control" required />
+                <div class="input-group-append">
+                    <input type="submit" value="Aanmaken" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-secondary" asp-action="Index">Terug naar spellen</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
