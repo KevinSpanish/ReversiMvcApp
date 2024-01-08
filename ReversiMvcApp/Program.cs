@@ -18,7 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
                     builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddDbContext<ReversiDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("reversiDb")));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("ReversiMVCDB")));
 builder.Services.AddSingleton(new ReversiRestApiService());
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
