@@ -19,7 +19,7 @@ namespace ReversiMvcApp.Data
         public ReversiRestApiService()
         {
             httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://localhost:7258/");
+            httpClient.BaseAddress = new Uri("https://localhost:5000/");
         }
 
         public List<Spel> GetGamesPending()
