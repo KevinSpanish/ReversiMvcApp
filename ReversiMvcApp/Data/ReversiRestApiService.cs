@@ -19,12 +19,12 @@ namespace ReversiMvcApp.Data
         public ReversiRestApiService()
         {
             httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://localhost:5000");
+            httpClient.BaseAddress = new Uri("https://localhost:5000/api");
         }
 
         public List<Spel> GetGamesPending()
         {
-            var result = httpClient.GetAsync("/api/spel/").Result;
+            var result = httpClient.GetAsync("/spel/").Result;
             if (result.IsSuccessStatusCode)
             {
                 List<Spel> objecten = new();
@@ -41,7 +41,7 @@ namespace ReversiMvcApp.Data
         public Spel GetGame(string token)
         {
             Spel objects = null;
-            var result = httpClient.GetAsync($"/api/spel/{token}").Result;
+            var result = httpClient.GetAsync($"/spel/{token}").Result;
             if (result.IsSuccessStatusCode)
             {
                 objects = result.Content.ReadAsAsync<Spel>().Result;
@@ -53,7 +53,7 @@ namespace ReversiMvcApp.Data
         public Spel GetGameByPlayer(string playerToken)
         {
             Spel objects = null;
-            var result = httpClient.GetAsync($"/api/spel/speler/{playerToken}").Result;
+            var result = httpClient.GetAsync($"/spel/speler/{playerToken}").Result;
             if (result.IsSuccessStatusCode)
             {
                 objects = result.Content.ReadAsAsync<Spel>().Result;
@@ -71,7 +71,7 @@ namespace ReversiMvcApp.Data
                 new KeyValuePair<string, string>("omschrijving", omschrijving)
             });
 
-            HttpResponseMessage result = httpClient.PostAsync($"/api/Spel/", formContent).Result;
+            HttpResponseMessage result = httpClient.PostAsync($"/Spel/", formContent).Result;
             if (result.IsSuccessStatusCode)
             {
                 objecten = result.Content.ReadAsAsync<Spel>().Result;
@@ -90,7 +90,7 @@ namespace ReversiMvcApp.Data
             });
 
             HttpResponseMessage result = httpClient.PostAsync(
-                $"/api/Spel/{spelToken}/join/", formContent).Result;
+                $"/Spel/{spelToken}/join/", formContent).Result;
             if (result.IsSuccessStatusCode)
             {
                 objects = result.Content.ReadAsAsync<Spel>().Result;
@@ -101,7 +101,7 @@ namespace ReversiMvcApp.Data
 
         public bool Delete(string spelToken)
         {
-            var result = httpClient.DeleteAsync($"/api/spel/{spelToken}/verwijder").Result;
+            var result = httpClient.DeleteAsync($"/spel/{spelToken}/verwijder").Result;
             return result.IsSuccessStatusCode;
         }
     }
